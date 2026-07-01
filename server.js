@@ -39,7 +39,11 @@ redis.on('message', (channel, message) => {
 
 io.on('connection', (socket) => {
     console.log('A user connected:', socket.id);
-    
+
+    socket.on('notification.created', (data) => {
+        console.log('Received notification:', data);
+    });
+
     socket.on('disconnect', () => {
         console.log('A user disconnected:', socket.id);
     });

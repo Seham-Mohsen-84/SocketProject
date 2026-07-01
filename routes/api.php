@@ -1,7 +1,9 @@
 <?php
 
+use App\Events\PublicMessage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -10,7 +12,7 @@ Route::get('/user', function (Request $request) {
 Route::post('/send-message', function (Request $request) {
     $message = $request->input('message', 'Hello World!');
     
-    broadcast(new \App\Events\PublicMessage($message));
+    broadcast(new PublicMessage($message));
     
     return response()->json([
         'status' => 'Success',
